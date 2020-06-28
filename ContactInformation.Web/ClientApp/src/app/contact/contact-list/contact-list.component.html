@@ -1,0 +1,27 @@
+<h4 id="tableLabel">Contact List</h4>
+
+<p *ngIf="!contacts"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="contacts">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let contact of contacts">
+      <td>{{ contact.name }}</td>
+      <td>{{ contact.email }}</td>
+      <td>{{ contact.phone }}</td>
+      <td>{{ contact.active ? 'Active' : 'Inactive' }}</td>
+      <td class="action-td">
+        <a [routerLink]="['/update/', contact.id]"><i class="fa fa-pencil fa-fw action" aria-hidden="true"></i></a>
+        <i class="fa fa-remove fa-fw action" aria-hidden="true" (click)="delete(contact.id)"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>

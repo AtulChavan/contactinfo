@@ -1,0 +1,26 @@
+<div class="container">
+  <h3>{{ contact.id >= 0 ? 'Update: ' + contact.name : 'Add Contact' }}</h3>
+  <form name="contactInfo">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" [(ngModel)]="contact.name" required placeholder="firstname lastname">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Email</label>
+      <input type="text" class="form-control" id="email" name="email" [(ngModel)]="contact.email" required placeholder="abx@xyz.com">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Phone</label>
+      <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="contact.phone" required placeholder="+911234567890">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Active</label>
+      <input type="checkbox" class="form-control" id="active" name="active" [(ngModel)]="contact.active">
+    </div>
+       
+    <input class="btn btn-success" *ngIf="contact" type="button" name="update" (click)="contact.id >= 0 ? updateContact(contact.id, contact) : addContact(contact)" value="Save" />
+  </form>
+</div>
