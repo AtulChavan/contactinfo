@@ -7,15 +7,19 @@ namespace ContactInformation.Repository.Context
     public class ContactDbContext : DbContext
     {
         private const string CONNECTION_STRING_KEY = "ContactCS";
-        private string _connectionString;
+        private readonly string _connectionString;
+        private const string DB_USER_NAME = "contactadmin";
+        private const string DB_USER_PASSWORD = "EWBKD3C93JfjxNX";
 
         public ContactDbContext()
-        {            
+        {
         }
 
         public ContactDbContext(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString(CONNECTION_STRING_KEY);
+            if (!string.IsNullOrEmpty(_connectionString))
+                _connectionString = string.Format(_connectionString, DB_USER_NAME, DB_USER_PASSWORD);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -67,7 +71,7 @@ namespace ContactInformation.Repository.Context
                 new Status() { StatusId = 0, Name = "Inactive" },
                 new Status() { StatusId = 1, Name = "Active" });
         }
-                
+
         public DbSet<Contact> Contact { get; set; }
         public DbSet<Status> Status { get; set; }
     }
